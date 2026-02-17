@@ -11,19 +11,29 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import environ
+import os
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, ".env"))  # ← تأكد من السطر ده
+
+
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
+
+# قراءة المفاتيح من .env
+ORS_API_KEY = env('ORS_API_KEY')
+OPENCAGE_API_KEY = env('OPENCAGE_API_KEY')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3t-hbq00%yv&1v$jgp7is&kp@o_s-+yi5=((s0!vh9=uwlw-+6'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -130,5 +140,4 @@ CACHES = {
     }
 }
 
-
-ORS_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImEyZDAzMTJlYjM1ZDQ3Y2RiMGMzZWYwMjM1MTBlZTg3IiwiaCI6Im11cm11cjY0In0="
+ORS_API_KEY = env('ORS_API_KEY')

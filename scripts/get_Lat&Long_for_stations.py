@@ -1,3 +1,4 @@
+from django.conf import settings
 import pandas as pd
 import time
 import requests
@@ -28,13 +29,11 @@ geocode = RateLimiter(
 )
 
 
-OPENCAGE_API_KEY = "d0bf848bdead4f7ca85bb1f53c48e393"
-
 def geocode_opencage(query):
     url = "https://api.opencagedata.com/geocode/v1/json"
     params = {
         "q": query,
-        "key": OPENCAGE_API_KEY,
+        "key": settings.OPENCAGE_API_KEY,
         "limit": 1,
         "countrycode": "us"
     }
