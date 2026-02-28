@@ -35,6 +35,7 @@ class RouteFuelAPIView(APIView):
                  [(stop.latitude, stop.longitude) for stop in stops] + \
                  [(end["lat"], end["lng"])]
 
+
         final_route = RouteService.get_route_multi(points)
 
         total_cost = calculate_total_cost(
